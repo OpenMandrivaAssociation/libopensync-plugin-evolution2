@@ -1,23 +1,21 @@
 %define name	libopensync-plugin-evolution2
-%define version	0.20
-%define release %mkrel 2
+%define version	0.22
+%define release %mkrel 1
 
 Name: 	 	%{name}
-Summary: 	Evolution2 plugin for opensync synchronization tool
 Version: 	%{version}
 Release: 	%{release}
-
-Source:		%{name}-%{version}.tar.gz
+Summary: 	Evolution2 plugin for opensync synchronization tool
 URL:		http://www.opensync.org
 License:	GPL
 Group:		Office
-BuildRoot:	%{_tmppath}/%{name}-buildroot
-
-BuildRequires:	opensync-devel >= %{version}
-BuildRequires:	evolution-data-server-devel
-
+Source:		svn://svn.opensync.org/plugins/syncml/%{name}-%{version}.tar.bz2
 Obsoletes:	multisync-evolution
 Provides:	multisync-evolution
+BuildRequires:	opensync-devel >= %{version}
+BuildRequires:	evolution-data-server-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}
+
 
 %description
 This plugin allows applications using OpenSync to synchronise to and from
@@ -38,13 +36,13 @@ Header files for developing programs based on %name.
 %make
 										
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
 
 %find_lang %name
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
@@ -55,5 +53,3 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(-,root,root)
 %{_includedir}/opensync-1.0/opensync/*
-
-
