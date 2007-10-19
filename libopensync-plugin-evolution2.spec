@@ -1,5 +1,5 @@
 %define name	libopensync-plugin-evolution2
-%define version	0.22
+%define version	0.33
 %define release %mkrel 1
 
 Name: 	 	%{name}
