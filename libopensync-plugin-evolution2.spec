@@ -14,19 +14,14 @@ Obsoletes:	multisync-evolution
 Provides:	multisync-evolution
 BuildRequires:	opensync-devel >= %{version}
 BuildRequires:	evolution-data-server-devel
+# fwang: it does not produce devel files anymore
+Obsoletes:	%{name}-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 
 %description
 This plugin allows applications using OpenSync to synchronise to and from
 Evolution.
-
-%package	devel
-Summary:        Header files from %name
-Group:          Development/C
-
-%description 	devel
-Header files for developing programs based on %name.
 
 %prep
 %setup -q
@@ -46,10 +41,6 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-%doc AUTHORS ChangeLog NEWS README
+%doc README
 %{_libdir}/opensync/plugins/*
 %{_datadir}/opensync/defaults/*
-
-%files devel
-%defattr(-,root,root)
-%{_includedir}/opensync-1.0/opensync/*
