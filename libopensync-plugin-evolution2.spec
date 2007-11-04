@@ -1,5 +1,5 @@
 %define name	libopensync-plugin-evolution2
-%define version	0.33
+%define version	0.34
 %define release %mkrel 1
 
 Name: 	 	%{name}
@@ -7,13 +7,14 @@ Version: 	%{version}
 Release: 	%{release}
 Summary: 	Evolution2 plugin for opensync synchronization tool
 URL:		http://www.opensync.org
-License:	GPL
+License:	GPLv2+
 Group:		Office
 Source:		svn://svn.opensync.org/plugins/syncml/%{name}-%{version}.tar.bz2
 Obsoletes:	multisync-evolution
 Provides:	multisync-evolution
 BuildRequires:	opensync-devel >= %{version}
 BuildRequires:	evolution-data-server-devel
+BuildRequires:	cmake
 # fwang: it does not produce devel files anymore
 Obsoletes:	%{name}-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}
@@ -27,12 +28,14 @@ Evolution.
 %setup -q
 
 %build
-%configure2_5x
+%cmake
 %make
 										
 %install
 rm -rf %{buildroot}
+cd build
 %makeinstall_std
+cd -
 
 %find_lang %name
 
