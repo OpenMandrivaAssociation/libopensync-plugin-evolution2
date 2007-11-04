@@ -10,6 +10,7 @@ URL:		http://www.opensync.org
 License:	GPLv2+
 Group:		Office
 Source:		svn://svn.opensync.org/plugins/syncml/%{name}-%{version}.tar.bz2
+Patch0:		libopensync-plugin-evolution2-0.34-eds12-find.patch
 Obsoletes:	multisync-evolution
 Provides:	multisync-evolution
 BuildRequires:	opensync-devel >= %{version}
@@ -26,6 +27,9 @@ Evolution.
 
 %prep
 %setup -q
+cd cmake/modules
+%patch0 -p0
+cd -
 
 %build
 %cmake
