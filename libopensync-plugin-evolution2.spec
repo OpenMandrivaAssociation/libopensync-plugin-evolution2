@@ -18,7 +18,6 @@ BuildRequires:	evolution-data-server-devel
 BuildRequires:	cmake
 # fwang: it does not produce devel files anymore
 Obsoletes:	%{name}-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 
 %description
