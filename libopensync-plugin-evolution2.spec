@@ -1,5 +1,5 @@
 %define name	libopensync-plugin-evolution2
-%define version	0.35
+%define version	0.36
 %define release %mkrel 1
 
 Name: 	 	%{name}
@@ -9,7 +9,7 @@ Summary: 	Evolution2 plugin for opensync synchronization tool
 URL:		http://www.opensync.org
 License:	GPLv2+
 Group:		Office
-Source:		svn://svn.opensync.org/plugins/syncml/%{name}-%{version}.tar.bz2
+Source:		http://opensync.org/download/releases/%version/%name-%version.tar.bz2
 Obsoletes:	multisync-evolution
 Provides:	multisync-evolution
 BuildRequires:	opensync-devel >= %{version}
