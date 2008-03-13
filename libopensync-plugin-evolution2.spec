@@ -1,24 +1,22 @@
-%define name	libopensync-plugin-evolution2
-%define version	0.36
-%define release %mkrel 1
-
-Name: 	 	%{name}
-Version: 	%{version}
-Release: 	%{release}
-Summary: 	Evolution2 plugin for opensync synchronization tool
+Name: 	 	libopensync-plugin-evolution2
+Version: 	0.22
+Epoch:		1
+Release: 	%{mkrel 2}
+Summary: 	Evolution plugin for OpenSync synchronization framework
 URL:		http://www.opensync.org
-License:	GPLv2+
+License:	LGPLv2+
 Group:		Office
-Source:		http://opensync.org/download/releases/%version/%name-%version.tar.bz2
+Source0:	http://www.opensync.org/download/releases/%{version}/%{name}-%{version}.tar.bz2
+# Don't use -Wall and -Werror - AdamW 2008/03
+Patch0:		libopensync-plugin-evolution2-0.22-warning.patch
 Obsoletes:	multisync-evolution
 Provides:	multisync-evolution
-BuildRequires:	opensync-devel >= %{version}
+BuildRequires:	libopensync-devel < 0.30
 BuildRequires:	evolution-data-server-devel
-BuildRequires:	cmake
-# fwang: it does not produce devel files anymore
-Obsoletes:	%{name}-devel
+Requires:	libopensync >= %{epoch}:%{version}
+Requires:	evolution
 BuildRoot:	%{_tmppath}/%{name}-%{version}
-
+Obsoletes:	%{name}-devel <= %{version}-%{release}
 
 %description
 This plugin allows applications using OpenSync to synchronise to and from
@@ -26,24 +24,27 @@ Evolution.
 
 %prep
 %setup -q
+%patch0 -p1 -b .warning
 
 %build
-%cmake
+autoreconf -i
+%configure2_5x
 %make
 										
 %install
 rm -rf %{buildroot}
-cd build
 %makeinstall_std
-cd -
 
-%find_lang %name
+rm -rf %{buildroot}%{_includedir}
+
+%find_lang %{name}
 
 %clean
 rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-%doc README
-%{_libdir}/opensync-1.0/plugins/*
-%{_datadir}/opensync-1.0/defaults/*
+%doc AUTHORS ChangeLog NEWS README
+%{_libdir}/opensync/plugins/*
+%{_datadir}/opensync/defaults/*
+
