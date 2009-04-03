@@ -1,7 +1,7 @@
 Name: 	 	libopensync-plugin-evolution2
 Version: 	0.22
 Epoch:		1
-Release: 	%{mkrel 2}
+Release: 	%{mkrel 3}
 Summary: 	Evolution plugin for OpenSync synchronization framework
 URL:		http://www.opensync.org
 License:	LGPLv2+
@@ -13,6 +13,7 @@ Obsoletes:	multisync-evolution
 Provides:	multisync-evolution
 BuildRequires:	libopensync-devel < 0.30
 BuildRequires:	evolution-data-server-devel
+BuildRequires:	dbus-glib-devel
 Requires:	libopensync >= %{epoch}:%{version}
 Requires:	evolution
 BuildRoot:	%{_tmppath}/%{name}-%{version}
